@@ -1,0 +1,137 @@
+using System;
+
+class SortingMethods
+{
+    // Método de ordenamiento: Straight Merging
+    public static void StraightMergingSort(int[] arr)
+    {
+        StraightMergeSort(arr, 0, arr.Length - 1);
+        PrintArray(arr);
+    }
+
+    private static void StraightMergeSort(int[] arr, int left, int right)
+    {
+        if (left < right)
+        {
+            int mid = (left + right) / 2;
+            StraightMergeSort(arr, left, mid);
+            StraightMergeSort(arr, mid + 1, right);
+            Merge(arr, left, mid, right);
+        }
+    }
+
+    private static void Merge(int[] arr, int left, int mid, int right)
+    {
+        int n1 = mid - left + 1;
+        int n2 = right - mid;
+
+        int[] L = new int[n1];
+        int[] R = new int[n2];
+
+        Array.Copy(arr, left, L, 0, n1);
+        Array.Copy(arr, mid + 1, R, 0, n2);
+
+        int i = 0, j = 0;
+        int k = left;
+
+        while (i < n1 && j < n2)
+        {
+            if (L[i] <= R[j])
+            {
+                arr[k] = L[i];
+                i++;
+            }
+            else
+            {
+                arr[k] = R[j];
+                j++;
+            }
+            k++;
+        }
+
+        while (i < n1)
+        {
+            arr[k] = L[i];
+            i++;
+            k++;
+        }
+
+        while (j < n2)
+        {
+            arr[k] = R[j];
+            j++;
+            k++;
+        }
+    }
+
+    // Función de entrada de datos
+    static int[] GetIntArrayFromInput(string message)
+    {
+        Console.WriteLine(message);
+        string input = Console.ReadLine();
+        string[] stringArray = input.Split(' ');
+        int[] intArray = new int[stringArray.Length];
+
+        for (int i = 0; i < stringArray.Length; i++)
+        {
+            intArray[i] = int.Parse(stringArray[i]);
+        }
+
+        return intArray;
+    }
+
+    // Función auxiliar para imprimir el arreglo
+    static void PrintArray(int[] arr)
+    {
+        Console.WriteLine("Arreglo ordenado:");
+        foreach (var item in arr)
+        {
+            Console.Write(item + " ");
+        }
+        Console.WriteLine();
+    }
+
+    static void Main(string[] args)
+    {
+        int[] arr = GetIntArrayFromInput("Ingrese los elementos del arreglo separados por espacios:");
+
+        Console.WriteLine("Selecciona un método de ordenamiento:");
+        Console.WriteLine("1. Straight Merging");
+        Console.WriteLine("2. Natural Merging");
+        Console.WriteLine("3. Balanced Multiway Merging");
+        Console.WriteLine("4. Polyphase Sort");
+        Console.WriteLine("5. Distribution of Initial Runs");
+
+        int opcion = Convert.ToInt32(Console.ReadLine());
+
+        switch (opcion)
+        {
+            case 1:
+                StraightMergingSort(arr);
+                break;
+            case 2:
+                // Implementación de Natural Merging Sort
+                Console.WriteLine("Natural Merging Sort");
+                PrintArray(arr); // Muestra el arreglo original ya que no hay implementación
+                break;
+            case 3:
+                // Implementación de Balanced Multiway Merging Sort
+                Console.WriteLine("Balanced Multiway Merging Sort");
+                PrintArray(arr); // Muestra el arreglo original ya que no hay implementación
+                break;
+            case 4:
+                // Implementación de Polyphase Sort
+                Console.WriteLine("Polyphase Sort");
+                PrintArray(arr); // Muestra el arreglo original ya que no hay implementación
+                break;
+            case 5:
+                // Implementación de Distribution of Initial Runs Sort
+                Console.WriteLine("Distribution of Initial Runs Sort");
+                PrintArray(arr); // Muestra el arreglo original ya que no hay implementación
+                break;
+            default:
+                Console.WriteLine("Opción no válida.");
+                break;
+        }
+    }
+}
